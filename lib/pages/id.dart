@@ -178,15 +178,18 @@ import 'package:flutter/services.dart';
                 ),
                ),
                RaisedButton(
-                 elevation: 5,
-                 color: Colors.red,
+                 elevation: 3,
+                 color: Colors.white,
                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.red)
+                    side: BorderSide(color: Colors.red[600])
                   ),
-                 child: Text('EXIT',
-                 style: TextStyle(fontSize: 15,
-                 color: Colors.white)),
+                 child: Padding(
+                   padding: const EdgeInsets.fromLTRB(50,5,50,8),
+                   child: Text('New Login',
+                   style: TextStyle(fontSize: 20,
+                   color: Colors.red[600])),
+                 ),
                  onPressed: (){
                  Navigator.pop(context);
                })

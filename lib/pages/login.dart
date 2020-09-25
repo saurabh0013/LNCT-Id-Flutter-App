@@ -13,6 +13,8 @@ class _LoginState extends State<Login> {
   ProgressDialog progressDialog;
   String username;
   String password;
+  TextEditingController _controllerUser = TextEditingController(); 
+  TextEditingController _controllerPass = TextEditingController(); 
   final _loginService = LoginService(); //creating private variable to and assigning it to LoginService() class
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,7 @@ class _LoginState extends State<Login> {
               SizedBox(height: 40),
               Center(
                 child: TextField(
-                    onChanged: (val) {// takes value as a parameter  ,  val == whatever entered into the text form field
-                      username = val; //assign value to the variable -> username to pass it to login fun. as parameter
-                    },
+                   controller: _controllerUser,
                     maxLength: 11,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -54,9 +54,7 @@ class _LoginState extends State<Login> {
               Center(
                 child: TextField(
                   obscureText: true,
-                  onChanged: (val) { 
-                    password = val;
-                  },
+                  controller: _controllerPass,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     fillColor: Colors.grey[200],
@@ -81,14 +79,22 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       onPressed: () async {
+
                         progressDialog.show();
+                        setState(() {
+                          username = _controllerUser.text;
+                          password = _controllerPass.text;
+                        });
                         dynamic data =  
                             await _loginService.login(username, password); // using the login fun. of the login service class
                             // since we are returning the data from login fun. response is stored in  variable -> data 
                         UserModel userModel = UserModel.fromjson(data); //passing the data to user model class
-                                  
+                                setState(() {
+                          _controllerUser.text= '';
+                          _controllerPass.text= '';
+                        });  
                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Id(userModel)));
-                        //routing to UserModel class after paasing data ...to assign diff. elements of data to diff. variables
+                      
                         
                       }),
                 ),
