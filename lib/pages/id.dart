@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_id/models/user_model.dart';
 import 'package:flutter/services.dart';
+import 'package:ninja_id/pages/login.dart';
+
 
 
  class Id extends StatelessWidget{
@@ -106,12 +108,15 @@ import 'package:flutter/services.dart';
 
                 children: [
                   Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black)
+                    ),
                     height: 150,
                     width: 120,
                     margin: EdgeInsets.zero,
                     child: Image.network(userModel.imageUrl,
                     fit: BoxFit.cover,)),
-                    SizedBox(width: 30),
+                    SizedBox(width: 40),
                      Container(
                     height: 150,
                     width: 120,
@@ -122,7 +127,7 @@ import 'package:flutter/services.dart';
               ),
               SizedBox(height: 10.0),
               Center(
-                child: Text(userModel.name,
+                child: Text('${userModel.name}',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 23.0
@@ -163,7 +168,7 @@ import 'package:flutter/services.dart';
 
                  ]
                ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 20.0),
                Container(
                 height: 50,
                 width: 450,
@@ -177,21 +182,22 @@ import 'package:flutter/services.dart';
                   ),),
                 ),
                ),
+                SizedBox(height: 20.0),
                RaisedButton(
                  elevation: 3,
                  color: Colors.white,
                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     side: BorderSide(color: Colors.red[600])
                   ),
                  child: Padding(
-                   padding: const EdgeInsets.fromLTRB(50,5,50,8),
+                   padding: const EdgeInsets.fromLTRB(20,10,20,10),
                    child: Text('New Login',
                    style: TextStyle(fontSize: 20,
                    color: Colors.red[600])),
                  ),
                  onPressed: (){
-                 Navigator.pop(context);
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Login()));
                })
             ],
           ),

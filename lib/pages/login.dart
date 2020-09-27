@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_id/models/user_model.dart';
 import 'package:ninja_id/pages/id.dart';
+import 'package:ninja_id/pages/error.dart';
 import 'package:ninja_id/services/login_service.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
@@ -16,6 +17,7 @@ class _LoginState extends State<Login> {
   TextEditingController _controllerUser = TextEditingController(); 
   TextEditingController _controllerPass = TextEditingController(); 
   final _loginService = LoginService(); //creating private variable to and assigning it to LoginService() class
+ 
   @override
   Widget build(BuildContext context) {
     progressDialog = ProgressDialog(context,type: ProgressDialogType.Normal);
@@ -88,12 +90,14 @@ class _LoginState extends State<Login> {
                         dynamic data =  
                             await _loginService.login(username, password); // using the login fun. of the login service class
                             // since we are returning the data from login fun. response is stored in  variable -> data 
-                        UserModel userModel = UserModel.fromjson(data); //passing the data to user model class
+                            if (data == null) 
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> Error()));
+                        UserModel userModel =  UserModel.fromjson(data); //passing the data to user model class
                                 setState(() {
                           _controllerUser.text= '';
                           _controllerPass.text= '';
-                        });  
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Id(userModel)));
+                        }); 
+                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Id(userModel)));
                       
                         
                       }),

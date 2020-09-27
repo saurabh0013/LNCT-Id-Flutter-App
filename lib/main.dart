@@ -3,6 +3,8 @@ import 'package:ninja_id/models/user_model.dart';
 import 'package:ninja_id/pages/id.dart';
 import 'package:ninja_id/pages/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -14,21 +16,21 @@ void main() async {
   dynamic semester = prefs.get('semester');
   dynamic gender = prefs.get('gender');
   Map data = {
-     'name': name,
+     'Name': name,
     'ImageUrl': imageUrl,
     'username': username,
     'password': password,
-    'branch': branch,
-    'semseter': semester,
-    'gender': gender
+    'Branch': branch,
+    'Semseter': semester,
+    'Gender': gender
   };
  
 
-  print(data);
+  // print(data);
   Widget screen = name==null? Login() : Id(UserModel.fromjson(data)) ;
  
  runApp(MaterialApp(
-home: screen,
+home: screen
   ));
 }
 

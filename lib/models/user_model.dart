@@ -1,7 +1,7 @@
 
 
 class UserModel{
-  String name;
+  dynamic name;
   String imageUrl;
   String gender;
   String semester;
