@@ -17,7 +17,11 @@ class _LoginState extends State<Login> {
   TextEditingController _controllerUser = TextEditingController(); 
   TextEditingController _controllerPass = TextEditingController(); 
   final _loginService = LoginService(); //creating private variable to and assigning it to LoginService() class
- 
+   void dispose() {
+    _controllerUser.dispose();
+    _controllerPass.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     progressDialog = ProgressDialog(context,type: ProgressDialogType.Normal);
